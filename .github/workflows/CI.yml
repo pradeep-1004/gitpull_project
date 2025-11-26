@@ -1,0 +1,19 @@
+name: Databricks Deployment
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy-notebooks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Databricks CLI
+        run: pip install databricks-cli
+
+      - name: Update Notebooks in Workspace
+        run: |
+          databricks repos update --path /Repos/myrepo
